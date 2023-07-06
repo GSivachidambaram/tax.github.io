@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tax Calculator</title>
+</head>
+<body>
+<h1>Tax Calculator</h1>
+<form action="/" method="post">
+<input type="text" name="annualIncome" placeholder="Annual Income">
+<input type="text" name="80C" placeholder="80C Deduction">
+<input type="text" name="80D" placeholder="80D Deduction">
+<input type="submit" value="Calculate Tax">
+</form>
+<script>
+function calculateTax(annualIncome, 80C, 80D) {
+  // Calculate the tax under the old tax regime.
+  var oldTax = annualIncome * 0.30 - 80C - 80D;
+
+  // Calculate the tax under the new tax regime.
+  var newTax = annualIncome * 0.10;
+
+  // Return the results.
+  return {
+    oldTax: oldTax,
+    newTax: newTax
+  };
+}
+
+if (document.querySelector('form')) {
+  document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    var annualIncome = document.querySelector('input[name="annualIncome"]').value;
+    var 80C = document.querySelector('input[name="80C"]').value;
+    var 80D = document.querySelector('input[name="80D"]').value;
+
+    var results = calculateTax(annualIncome, 80C, 80D);
+
+    document.querySelector('body').innerHTML += '<p>Old Tax: ' + results.oldTax + '</p>';
+    document.querySelector('body').innerHTML += '<p>New Tax: ' + results.newTax + '</p>';
+  });
+}
+</script>
+</body>
+</html>
